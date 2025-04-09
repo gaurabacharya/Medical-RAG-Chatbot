@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medical Chat Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <header>
+            <h1>💬 MedBot - Your Health Companion</h1>
+            <p>Ask any health-related question and get instant answers.</p>
+        </header>
+
+        <div class="chat-box" id="chat-box">
+            <!-- Chat messages appear here -->
+        </div>
+
+        <form id="chat-form">
+            <input type="text" id="user-input" name="msg" placeholder="Type your question..." autocomplete="off" required />
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script>
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+        const chatBox = document.getElementById('chat-box');
+
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const message = userInput.value.trim();
+            if (message === "") return;
+
+            addMessage("You", message);
+            userInput.value = "";
+
+            fetch("/get", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `msg=${encodeURIComponent(message)}`
+            })
+            .then(response => response.text())
+            .then(data => {
+                addMessage("MedBot", data);
+            });
+        });
+
+        function addMessage(sender, text) {
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add("message", sender === "You" ? "user" : "bot");
+            messageDiv.innerHTML = `<strong>${sender}:</strong> ${text}`;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
