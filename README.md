@@ -15,7 +15,7 @@ Activate it
 
 Mac
 ```bash
-source env/bin/activate
+source ./llmapp/bin/activate
 ```
 
 Windows
