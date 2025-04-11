@@ -6,7 +6,7 @@ more correct responses than the LLM model by providing context data from a vecto
 
 ## How to Run 
 
-### Step 1: Create a virtual environment 
+### Step 1: Copy the repo and create a virtual environment 
 ```bash
 python3.10 -m venv llmapp
 ```

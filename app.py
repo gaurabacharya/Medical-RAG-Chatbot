@@ -8,8 +8,11 @@ from dotenv import load_dotenv
 from src.prompt import system_prompt
 from src.helper import download_hugging_face_embeddings
 import os
+from flask_cors import CORS
 
 app = Flask(__name__)
+
+CORS(app)
 
 load_dotenv()
 
@@ -43,13 +46,31 @@ rag_chain = create_retrieval_chain(retriever, question_answer_chain)
 def index():
     return render_template("chat.html")
 
-@app.route("/get", methods=["GET", "POST"])
+# @app.route("/get", methods=["GET", "POST"])
+# def chat():
+#     msg = request.form["msg"]
+#     print(msg)
+#     response = rag_chain.invoke({"input": msg})
+#     print("Response: ", response["answer"])
+#     return str(response["answer"])
+
+# @app.route("/api/chat", methods=["POST"])
+# def chat():
+#     msg = request.json.get("msg")  # note: JSON input from React
+#     print(msg)
+#     response = rag_chain.invoke({"input": msg})
+#     print("Response: ", response["answer"])
+#     return jsonify({"answer": response["answer"]})
+@app.route("/api/chat", methods=["POST"])
 def chat():
-    msg = request.form["msg"]
-    print(msg)
+    data = request.get_json()
+    msg = data.get("msg")
+    print("User message:", msg)
+
     response = rag_chain.invoke({"input": msg})
-    print("Response: ", response["answer"])
-    return str(response["answer"])
+    print("Bot response:", response["answer"])
+
+    return jsonify({"answer": response["answer"]})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True)

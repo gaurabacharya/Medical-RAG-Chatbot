@@ -4,6 +4,7 @@ flask
 pypdf
 numpy
 python-dotenv
+flask-cors
 pinecone
 langchain-pinecone
 langchain_community
