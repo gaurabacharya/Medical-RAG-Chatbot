@@ -6,7 +6,7 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.memory import ConversationBufferMemory
 from dotenv import load_dotenv
-from src.prompt import system_prompt, system_prompt_citation
+from src.prompt import system_prompt
 from src.helper import download_hugging_face_embeddings
 import os
 from flask_cors import CORS
