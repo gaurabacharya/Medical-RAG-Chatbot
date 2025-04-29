@@ -1,4 +1,5 @@
 # Medical-RAG-Chatbot
+<img width="917" alt="Medical Chatbot" src="https://github.com/user-attachments/assets/462afa80-f6db-4ffc-b2f3-32ecbe75ff70" />
 
 ## Demo of the API working with a frontend UI
 https://youtu.be/-NcgFqA0GN8
