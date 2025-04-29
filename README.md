@@ -1,7 +1,7 @@
 # Medical-RAG-Chatbot
 
 ## Demo of the API working with a frontend UI
-https://youtu.be/wdWfzJMIHF4
+https://youtu.be/-NcgFqA0GN8
 
 ## Summary
 This medical chatbot was created using RAG (Retrieval Augmented Generation) to produce 
